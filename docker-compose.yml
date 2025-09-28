@@ -1,0 +1,14 @@
+services:
+  netdata:
+    build: .
+    container_name: netdata
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    ports:
+      - 19999:19999
+    volumes:
+      - ./health.d:/etc/netdata/health.d
+    environment:
+      - NETDATA_CLOUD_DISABLE=yes
